@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import './PlayerInfo.css';
 
 const PlayerInfo = () => {
+
+    const [guess, setGuess] = useState("");
+    const [feedback, setFeedback] = useState("");
+    const [showPopup, setShowPopup] = useState(false);
+
+    
     const [playerData, setPlayerData] = useState(() => {
         const savedPlayer = localStorage.getItem("playerData");
         return savedPlayer ? JSON.parse(savedPlayer) : null;
     });
-    const [guess, setGuess] = useState("");
-    const [feedback, setFeedback] = useState("");
-    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         if (!playerData) {
@@ -28,15 +31,14 @@ const PlayerInfo = () => {
             setTimeout(() => {
                 setShowPopup(false);
                 refreshPlayer();
-            },4500); 
+            },2000);
         } else {
             setFeedback("Errado! Tente novamente.");
         }
         setShowPopup(true);
-
         setTimeout(() => {
             setShowPopup(false);
-        }, 4000);
+        }, 2000);
     };
 
     const refreshPlayer = () => {
@@ -54,8 +56,6 @@ const PlayerInfo = () => {
                 <img className='imgPlayer' src={playerData.image_url} alt={`${playerData.full_name}`} width="200" />
             )}
             <h2 className='namePlayer'>{playerData.full_name}</h2>
-
-            {/* Pop-up animado */}
             {showPopup && (
                 <div className='popup'>
                     <p>{feedback}</p>
