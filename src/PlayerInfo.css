@@ -9,31 +9,24 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.5s, fadeOut 0.5s 2.5s; /* animação de entrada e saída */
     opacity: 1;
     z-index: 1000;
 }
 
-/* Animação de fade-in */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
+.stats-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 14px;
+  width: 220px;
+}
+.stats-box h4 {
+  margin-bottom: 6px;
+  font-weight: bold;
 }
 
-/* Animação de fade-out */
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-    to {
-        opacity: 0;
-        transform: translate(-50%, -40%);
-    }
-}
