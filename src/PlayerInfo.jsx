@@ -93,7 +93,7 @@ const PlayerInfo = () => {
 
       <div className="stats-box">
         <h4>Status</h4>
-        <p>Posição: <strong>{playerData.status?.position || "?"}</strong></p>
+        <p>SEASON: <strong>{playerData.status?.season ?? 'Career'}</strong></p>
         <p>PTS: <strong>{playerData.status?.pts ?? 0}</strong></p>
         <p>AST: <strong>{playerData.status?.ast ?? 0}</strong></p>
         <p>REB: <strong>{playerData.status?.reb ?? 0}</strong></p>

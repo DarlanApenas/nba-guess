@@ -16,9 +16,8 @@ def random_players():
     player = random.choice(nba_players)
     career = playercareerstats.PlayerCareerStats(player_id=player['id'])
     player_info = commonplayerinfo.CommonPlayerInfo(player_id=player['id'])
-    player_info_dic = player_info.get_normalized_dict()
-    status = player_info_dic['PlayerHeadlineStats'][0]
-    common_info = player_info_dic['CommonPlayerInfo'][0]
+    player_info_dic = player_info.player_headline_stats.get_dict()
+    status = player_info_dic['data'][0]
     career_df = career.get_data_frames()[0]
 
     ultimo_time_info = career_df[career_df['TEAM_ID'] != 0].iloc[-1]
@@ -27,13 +26,13 @@ def random_players():
     
     played_team = next((team for team in nba_teams if team['id'] == ultimo_time_id), None)
 
-    pts = float(status['PTS'])
-    ast = float(status['AST'])
-    reb = float(status['REB'])
 
     image_url = f"https://cdn.nba.com/headshots/nba/latest/1040x760/{player['id']}.png"
 
-
+    pts = float(status[3])
+    ast = float(status[4])
+    reb = float(status[5])
+    
     response = {
         "full_name": player['full_name'],
         "player_id": player['id'],
@@ -42,12 +41,10 @@ def random_players():
         "team_name": played_team['full_name'],
         "team_abbreviation": team_abbreviation,
         "status": {
+            'season': status[2],
             'pts': pts,
             'ast': ast,
-            'reb': reb,
-            'season': status['TimeFrame'],
-            'position': common_info['POSITION'],
-            'height': common_info['HEIGHT']
+            'reb': reb
         }
     }
     
